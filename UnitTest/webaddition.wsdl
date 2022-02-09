@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Created by TIBCO WSDL-->
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://xmlns.example.com/1637563828654/OperationImpl/Process/MainProcess" xmlns:ns0="http://www.tibco.com/schemas/SEP_WEBSERVICES21/SharedResource/Schema/Schema.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="Untitled" targetNamespace="http://xmlns.example.com/1637563828654/OperationImpl/Process/MainProcess">
+    <wsdl:types>
+        <xs:schema xmlns="http://www.tibco.com/schemas/SEP_WEBSERVICES21/SharedResource/Schema/Schema.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.tibco.com/schemas/SEP_WEBSERVICES21/SharedResource/Schema/Schema.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified">
+            <xs:element name="Addition">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="ns0:Req"/>
+                        <xs:element ref="ns0:Res"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Req">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Num1" type="xs:string"/>
+                        <xs:element name="Num2" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Res">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Result" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:service name="Process_sp_Definition">
+        <wsdl:port name="SOAPEventSource" binding="tns:SOAPEventSourceBinding">
+            <soap:address location="http://localhost:8455/Process/MainProcess/Process%20Definition"/>
+        </wsdl:port>
+    </wsdl:service>
+    <wsdl:portType name="PortType">
+        <wsdl:operation name="Operation">
+            <wsdl:input message="tns:AddReqMessage"/>
+            <wsdl:output message="tns:AddResMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="SOAPEventSourceBinding" type="tns:PortType">
+        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="Operation">
+            <soap:operation style="rpc" soapAction="/Process/MainProcess/Process%20Definition"/>
+            <wsdl:input>
+                <soap:body use="literal" namespace="http://InputMessageNamespace" parts="AddReq"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" namespace="http://OutputMessageNamespace" parts="AddRes"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:message name="AddReqMessage">
+        <wsdl:part name="AddReq" element="ns0:Req"/>
+    </wsdl:message>
+    <wsdl:message name="AddResMessage">
+        <wsdl:part name="AddRes" element="ns0:Res"/>
+    </wsdl:message>
+</wsdl:definitions>

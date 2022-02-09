@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pfx="http://xmlns.example.com/1637563828654/OperationImpl/Process/MainProcess" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns="http://www.tibco.com/schemas/SEP_WEBSERVICES21/SharedResource/Schema/Schema.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <wsdl:import namespace="http://xmlns.example.com/1637563828654/OperationImpl/Process/MainProcess" location="/UnitTest/webaddition.wsdl"/>
+    <pd:name>UnitTest/Process Definition.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startX>150</pd:startX>
+    <pd:startY>64</pd:startY>
+    <pd:returnBindings>
+        <result>
+            <result>
+                <xsl:value-of select="$SOAPRequestReply/OperationResponse/AddRes/ns:Res/ns:Result"/>
+            </result>
+        </result>
+    </pd:returnBindings>
+    <pd:endName>End</pd:endName>
+    <pd:endX>659</pd:endX>
+    <pd:endY>77</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1637566023884</pd:targetNamespace>
+    <pd:activity name="SOAPRequestReply">
+        <pd:type>com.tibco.plugin.soap.SOAPSendReceiveActivity</pd:type>
+        <pd:resourceType>ae.activities.SOAPSendReceiveUI</pd:resourceType>
+        <pd:x>444</pd:x>
+        <pd:y>84</pd:y>
+        <config>
+            <timeout>0</timeout>
+            <soapAttachmentStyle>SwA</soapAttachmentStyle>
+            <timeoutType>Seconds</timeoutType>
+            <service>pfx:Process_sp_Definition</service>
+            <servicePort>SOAPEventSource</servicePort>
+            <operation>Operation</operation>
+            <soapAction>/Process/MainProcess/Process%20Definition</soapAction>
+            <endpointURL>http://localhost:8455/Process/MainProcess/Process%20Definition</endpointURL>
+            <authScheme>NONE</authScheme>
+        </config>
+        <pd:inputBindings>
+            <Operation>
+                <AddReq>
+                    <ns:Req/>
+                </AddReq>
+            </Operation>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>SOAPRequestReply</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>SOAPRequestReply</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>

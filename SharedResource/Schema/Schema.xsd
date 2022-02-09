@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	 xmlns="http://www.tibco.com/schemas/SEP_WEBSERVICES21/SharedResource/Schema/Schema.xsd"
+	 targetNamespace="http://www.tibco.com/schemas/SEP_WEBSERVICES21/SharedResource/Schema/Schema.xsd"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+	<xs:element name="Addition">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Req"/>
+				<xs:element ref="Res"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Req">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Num1" type="xs:string"/>
+				<xs:element name="Num2" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Res">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Result" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
